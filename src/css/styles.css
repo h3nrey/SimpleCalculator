@@ -21,6 +21,20 @@ body {
   height: 100vh;
 }
 
+footer {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: #1F1F29;
+}
+footer a {
+  color: #1E1D27;
+  transition: all 100ms;
+}
+footer a:hover {
+  font-weight: 700;
+}
+
 .font__bold {
   font-weight: 700;
 }

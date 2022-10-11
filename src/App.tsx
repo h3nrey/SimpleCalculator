@@ -269,6 +269,9 @@ function App() {
     </div>
     
     </div>
+    <footer>
+      <span>Made by: <a target="blank" href="https://github.com/h3nrey">Pedro Novaes</a> </span>
+    </footer>
     </div>
   )
 }

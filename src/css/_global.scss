@@ -18,6 +18,22 @@ body{
   height: 100vh;
 }
 
+footer{
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: $bg;
+
+  a{
+    color: $bgDark;
+    transition: all 100ms;
+
+    &:hover{
+      font-weight: 700;
+    }
+  }
+}
+
 .font__bold{
   font-weight: 700;
 }
