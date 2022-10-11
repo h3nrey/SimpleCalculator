@@ -47,13 +47,8 @@ function App() {
   const [keyDetected, setKeyDetected] = useState<KeyboardEvent>();
 
   useEffect(() => {
-    console.log("atualizou operations: "+ operations)
     if(operations.length > 0) {
       let lastOp = operations[operations.length - 1];
-      handleSetNumbers(parseFloat(actualNumber))
-      setActualNumber("");
-      setDisplayOutput(`${displayOutput} ${lastOp.symbol}`)
-      console.log("display: " + displayOutput);
 
       if(lastOp.value == "exponentiation" || lastOp.value == "squareRoot") {
         let result = Calculate();
@@ -65,6 +60,8 @@ function App() {
       }
     }
   }, [operations])
+
+  console.log(displayOutput);
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeyUp, true);
@@ -91,6 +88,27 @@ function App() {
     setNumbers(numbersArray);
   }
 
+  function handleSetOperation(operation: string, symbol: string) {
+    let lastOp = operations[operations.length - 1];
+    if(isNaN(parseFloat(actualNumber)) == false) {
+      handleSetNumbers(parseFloat(actualNumber))      
+    } 
+    
+    if(displayOutput.length > 0) {
+      if(isNaN(parseFloat(actualNumber)) == false) {
+        setOperations([...operations,{value: operation, symbol: symbol}]) 
+        setDisplayOutput(`${displayOutput} ${symbol} `)
+      } else {
+        const opsArray:Operation[] = operations;
+        opsArray[operations.length - 1] = {value: operation, symbol: symbol}
+        setOperations(opsArray)
+        let text:string = displayOutput.replace(/.$/,symbol);
+        console.log(text)
+        setDisplayOutput(text)
+      } 
+    }
+    setActualNumber("");
+  }
   function Calculate() {
     let result: number = numbers[0];
 
@@ -170,61 +188,49 @@ function App() {
      <OperationButton 
       operation='add'
       operationSymbol='+'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationAdd}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
      <OperationButton 
       operation='subtract'
       operationSymbol='-'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationSubtract}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
      <OperationButton 
       operation='multiply'
       operationSymbol='x'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationMultiply}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
      <OperationButton 
       operation='divide'
       operationSymbol='/'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationDivide}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
      <OperationButton 
       operation='exponentiation'
       operationSymbol='X²'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationExponentiation}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
      <OperationButton 
       operation='squareRoot'
       operationSymbol='√x'
-      operations={operations}
-      handleSetOperation={setOperations}
+      handleSetOperation={handleSetOperation}
       keycode={keys.OperationSquareroot}
       actualKeyCode={actualKey}
-      displayOutput={displayOutput}
       keyDetected={keyDetected }
      />
 
