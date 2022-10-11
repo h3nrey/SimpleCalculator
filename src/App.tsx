@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Button } from './components/Button';
 import { NumberButton } from './components/NumberButton';
 import { OperationButton } from './components/OperationButton';
 
@@ -40,7 +41,9 @@ export enum operationSymbols{
 
 function App() {
   const [actualNumber, setActualNumber] = useState("");
-  const [displayOutput, setDisplayOutput] = useState("");
+  const [displayOutput, setDisplayOutput] = useState("0");
+  const [lastOperationsText, setLastOperationsText] = useState<String>();
+  const [isFirstText, setIsFirstText] = useState<Boolean>(true);
   const [numbers, setNumbers] = useState<Array<number>>([]);
   const [operations, setOperations] = useState<Operation[]>([])
   const [actualKey, setActualKey] = useState<string>()
@@ -51,12 +54,7 @@ function App() {
       let lastOp = operations[operations.length - 1];
 
       if(lastOp.value == "exponentiation" || lastOp.value == "squareRoot") {
-        let result = Calculate();
-
-        setNumbers([]);
-        setOperations([])
-        setActualNumber(result.toString());
-        setDisplayOutput(result.toString());
+        getResult();
       }
     }
   }, [operations])
@@ -78,8 +76,15 @@ function App() {
   },[actualKey])
 
   function handleSetNumberText(num:  string) {
-    setActualNumber(`${actualNumber}${num}`)
-    setDisplayOutput(`${displayOutput}${num}`)
+    if(!isFirstText) {
+      setActualNumber(`${actualNumber}${num}`)
+      setDisplayOutput(`${displayOutput}${num}`)
+    }
+    else {
+      setActualNumber(num)
+      setDisplayOutput(num)
+      setIsFirstText(false);
+    }
   }
 
   function handleSetNumbers(num: number) {
@@ -144,19 +149,21 @@ function App() {
 
   function getResult() {
     handleSetNumbers(Number(actualNumber))
-      let result: number = numbers[0];
-
-      result = Calculate();   
-      
-      setNumbers([]);
-      setOperations([])
-      setActualNumber(result.toString());
-      setDisplayOutput(result.toString());
+    let result = Calculate();   
+    
+    setNumbers([]);
+    setOperations([])
+    setActualNumber(result.toString());
+    setIsFirstText(true);
+    setLastOperationsText(displayOutput);
+    setDisplayOutput(result.toString());
   }
 
   function ClearNumbers() {
-    setDisplayOutput("");
+    setDisplayOutput("0");
     setActualNumber("");
+    setLastOperationsText("")
+    setIsFirstText(true);
     setNumbers([]);
     setOperations([]);
   }
@@ -167,9 +174,19 @@ function App() {
       <h1>Calculator</h1>
     
     <div className='input-button__container'>
-      <input className='bg__light font__bold' type="text" value={displayOutput} readOnly/>
+      <div className='input__container'>
+       <input className='bg__light font__bold' type="text" value={displayOutput} readOnly/>
+       <span>{lastOperationsText}</span>
+      </div>
       <div className="buttons__container">
-      <button className='button bg__light font__bold' onClick={ClearNumbers}>C</button>
+      <Button 
+        text={"C"} 
+        keycode={keys.Backspace} 
+        actualKeyCode={actualKey} 
+        keyDetected={keyDetected} 
+        callback={ClearNumbers}
+        styles={"button__clear button bg__light font__bold"}
+      />
 
       <OperationButton 
         operation='exponentiation'
@@ -239,7 +256,15 @@ function App() {
 
       <NumberButton num={"0"} setNumber={handleSetNumberText} keycode={keys.Numpad0      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
       <NumberButton num={"."} setNumber={handleSetNumberText} keycode={keys.NumpadDecimal} actualKeyCode={actualKey} keyDetected={keyDetected}/>
-      <button className='button button__result font__bold' onClick={getResult}>=</button>
+      {/* <button className='button button__result font__bold' onClick={getResult}>=</button> */}
+      <Button 
+        text={"="} 
+        keycode={keys.Result} 
+        actualKeyCode={actualKey} 
+        keyDetected={keyDetected} 
+        callback={getResult}
+        styles={"button__result button bg__light"}
+      />
       </div>
     </div>
     

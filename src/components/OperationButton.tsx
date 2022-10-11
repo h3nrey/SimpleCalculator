@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Operation, operationSymbols } from "../App";
+import { Button } from "./Button";
 
 interface OperationButtonProps {
   operation: string;
@@ -17,19 +18,18 @@ export function OperationButton({handleSetOperation,
   actualKeyCode, 
   keycode, 
   keyDetected}: OperationButtonProps) {
-  const [activeClasses, setActiveClasses] = useState<string>();
-
-  useEffect(() => {
-    if(actualKeyCode == keycode) {
-      handleSetOperation(operation, operationSymbol)
-      setActiveClasses(`${stylesClasses} active`)
-    } else setActiveClasses(`${stylesClasses}`)
-  }, [keyDetected])
-
   return(
-    <button className={activeClasses} onClick={() => handleSetOperation(operation, operationSymbol)}
-    >
-      {operationSymbol}
-    </button>
+    // <button className={activeClasses} onClick={() => handleSetOperation(operation, operationSymbol)}
+    // >
+    //   {operationSymbol}
+    // </button>
+    <Button 
+    text={operationSymbol} 
+    keycode={keycode} 
+    actualKeyCode={actualKeyCode} 
+    keyDetected={keyDetected} 
+    callback={() => handleSetOperation(operation, operationSymbol)}
+    styles={"button bg__light"}
+    />
   )
 }

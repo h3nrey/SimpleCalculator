@@ -11,20 +11,40 @@
     font-size: 1.25rem;
     color: $darkText;
   }
-
-  input{
-    padding: 2.5rem 1rem;
-    border-radius: 0.5rem;
-    text-align: end;
-    font-size: 1.5rem;
-    color: $darkTittleText;
-  }
-
+  
   .input-button__container{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
+
+  .input__container{
+    position: relative;
+    input{
+      width: 100%;
+      padding: 2.9rem 1rem 1rem 1.1rem;
+      border-radius: 0.5rem;
+      text-align: end;
+      font-size: 1.8rem;
+      color: $weakApple;
+      user-select: contain;
+  
+      &::selection{
+        background-color: $apple;
+        color: $bgDark;
+      }
+    }
+
+    span{
+      color: $darkText;
+      position: absolute;
+      right: 5%;
+      top: 20%;
+      opacity: 0.7;
+    }
+  }
+  
+
 
   .buttons__container{
     display: grid;
@@ -50,8 +70,15 @@
       color: $weakApple;
       grid-column: 3 / span 2;
       font-size: 2rem;
-      padding: 0.5rem 0.5rem;
+      padding: 0.1rem 0.5rem;
       outline-color: $weakApple;
+    }
+
+    .button__clear {
+      color: $apple;
+      font-size: 18px;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
     }
 
   }
