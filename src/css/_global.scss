@@ -1,0 +1,26 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+body{
+  background-color: $weakApple;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.font__bold{
+  font-weight: 700;
+}
+
+.bg__light{
+  background-color: $bgLight;
+}

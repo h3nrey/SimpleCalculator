@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Operation, operationSymbols } from "../App";
 
 interface OperationButtonProps {
@@ -10,22 +10,24 @@ interface OperationButtonProps {
   keyDetected: KeyboardEvent | undefined;
 }
 
-
+const stylesClasses = "button bg__light"
 export function OperationButton({handleSetOperation, 
   operation,
   operationSymbol, 
   actualKeyCode, 
   keycode, 
   keyDetected}: OperationButtonProps) {
+  const [activeClasses, setActiveClasses] = useState<string>();
 
   useEffect(() => {
     if(actualKeyCode == keycode) {
       handleSetOperation(operation, operationSymbol)
-    }
+      setActiveClasses(`${stylesClasses} active`)
+    } else setActiveClasses(`${stylesClasses}`)
   }, [keyDetected])
 
   return(
-    <button onClick={() => handleSetOperation(operation, operationSymbol)}
+    <button className={activeClasses} onClick={() => handleSetOperation(operation, operationSymbol)}
     >
       {operationSymbol}
     </button>

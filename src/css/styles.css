@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+body {
+  background-color: #D8FBCC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.font__bold {
+  font-weight: 700;
+}
+
+.bg__light {
+  background-color: #302F3D;
+}
+
+.calculator__container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem 1rem 1rem;
+  border-radius: 1rem;
+  max-width: 17.5rem;
+  background-color: #1E1D27;
+  gap: 0.5rem;
+}
+.calculator__container h1 {
+  font-size: 1.25rem;
+  color: #9691AB;
+}
+.calculator__container input {
+  padding: 2.5rem 1rem;
+  border-radius: 0.5rem;
+  text-align: end;
+  font-size: 1.5rem;
+  color: #B2AEC1;
+}
+.calculator__container .input-button__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.calculator__container .buttons__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+}
+.calculator__container .buttons__container .button {
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.25rem;
+  color: #B2AEC1;
+  outline: 0 solid #77EE4F;
+  transition: all 200ms;
+  cursor: pointer;
+}
+.calculator__container .buttons__container .button.active, .calculator__container .buttons__container .button:hover {
+  outline-width: 0.2rem;
+}
+.calculator__container .buttons__container .button__result {
+  background-color: #77EE4F;
+  color: #D8FBCC;
+  grid-column: 3/span 2;
+  font-size: 2rem;
+  padding: 0.5rem 0.5rem;
+  outline-color: #D8FBCC;
+}/*# sourceMappingURL=styles.css.map */

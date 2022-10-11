@@ -163,79 +163,87 @@ function App() {
 
   return (
     <div className="App">
-     <h1>Calculator</h1>
-
-
-     <input type="text" value={displayOutput} readOnly/>
+    <div className='calculator__container'>
+      <h1>Calculator</h1>
     
-    <button onClick={ClearNumbers}>C</button>
+    <div className='input-button__container'>
+      <input className='bg__light font__bold' type="text" value={displayOutput} readOnly/>
+      <div className="buttons__container">
+      <button className='button bg__light font__bold' onClick={ClearNumbers}>C</button>
 
+      <OperationButton 
+        operation='exponentiation'
+        operationSymbol='X²'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationExponentiation}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
+      <OperationButton 
+        operation='squareRoot'
+        operationSymbol='√x'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationSquareroot}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
+      <OperationButton 
+        operation='divide'
+        operationSymbol='/'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationDivide}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
 
-     {/* numbers */}
-    <NumberButton num={"."} setNumber={handleSetNumberText} keycode={keys.NumpadDecimal} actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"0"} setNumber={handleSetNumberText} keycode={keys.Numpad0      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"1"} setNumber={handleSetNumberText} keycode={keys.Numpad1      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"2"} setNumber={handleSetNumberText} keycode={keys.Numpad2      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"3"} setNumber={handleSetNumberText} keycode={keys.Numpad3      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"4"} setNumber={handleSetNumberText} keycode={keys.Numpad4      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"5"} setNumber={handleSetNumberText} keycode={keys.Numpad5      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"6"} setNumber={handleSetNumberText} keycode={keys.Numpad6      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"7"} setNumber={handleSetNumberText} keycode={keys.Numpad7      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"8"} setNumber={handleSetNumberText} keycode={keys.Numpad8      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
-    <NumberButton num={"9"} setNumber={handleSetNumberText} keycode={keys.Numpad9      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      {/* numbers */}
+      
+      
+      <NumberButton num={"7"} setNumber={handleSetNumberText} keycode={keys.Numpad7      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"8"} setNumber={handleSetNumberText} keycode={keys.Numpad8      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"9"} setNumber={handleSetNumberText} keycode={keys.Numpad9      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <OperationButton 
+        operation='multiply'
+        operationSymbol='x'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationMultiply}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
+      <NumberButton num={"4"} setNumber={handleSetNumberText} keycode={keys.Numpad4      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"5"} setNumber={handleSetNumberText} keycode={keys.Numpad5      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"6"} setNumber={handleSetNumberText} keycode={keys.Numpad6      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <OperationButton 
+        operation='subtract'
+        operationSymbol='-'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationSubtract}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
+      <NumberButton num={"1"} setNumber={handleSetNumberText} keycode={keys.Numpad1      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"2"} setNumber={handleSetNumberText} keycode={keys.Numpad2      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"3"} setNumber={handleSetNumberText} keycode={keys.Numpad3      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
 
-     {/* operations */}
-     <OperationButton 
-      operation='add'
-      operationSymbol='+'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationAdd}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
-     <OperationButton 
-      operation='subtract'
-      operationSymbol='-'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationSubtract}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
-     <OperationButton 
-      operation='multiply'
-      operationSymbol='x'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationMultiply}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
-     <OperationButton 
-      operation='divide'
-      operationSymbol='/'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationDivide}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
-     <OperationButton 
-      operation='exponentiation'
-      operationSymbol='X²'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationExponentiation}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
-     <OperationButton 
-      operation='squareRoot'
-      operationSymbol='√x'
-      handleSetOperation={handleSetOperation}
-      keycode={keys.OperationSquareroot}
-      actualKeyCode={actualKey}
-      keyDetected={keyDetected }
-     />
+      {/* operations */}
+      <OperationButton 
+        operation='add'
+        operationSymbol='+'
+        handleSetOperation={handleSetOperation}
+        keycode={keys.OperationAdd}
+        actualKeyCode={actualKey}
+        keyDetected={keyDetected }
+      />
+      
+      
 
-
-     <button onClick={getResult}>=</button>
+      <NumberButton num={"0"} setNumber={handleSetNumberText} keycode={keys.Numpad0      } actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <NumberButton num={"."} setNumber={handleSetNumberText} keycode={keys.NumpadDecimal} actualKeyCode={actualKey} keyDetected={keyDetected}/>
+      <button className='button button__result font__bold' onClick={getResult}>=</button>
+      </div>
+    </div>
+    
+    </div>
     </div>
   )
 }

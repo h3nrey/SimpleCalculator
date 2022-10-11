@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface NumberButtonProps {
   num: string;
@@ -8,14 +8,20 @@ interface NumberButtonProps {
   keyDetected: KeyboardEvent | undefined;
 }
 
+const stylesClasses = "button bg__light"
 export function NumberButton({num, setNumber, keycode, actualKeyCode, keyDetected}: NumberButtonProps) {
+  const [activeClasses, setActiveClasses] = useState<string>();
+
   useEffect(() => {
     if(actualKeyCode == keycode) {
       setNumber(num);
-    }
+      setActiveClasses(`${stylesClasses} active`)
+    } else setActiveClasses(`${stylesClasses}`)
   }, [keyDetected])
   
   return(
-    <button onClick={() => setNumber(num)}>{num}</button>
+    <button className={activeClasses} onClick={() => setNumber(num)}>
+      {num}
+    </button>
   )
 }
